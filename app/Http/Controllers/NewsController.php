@@ -87,8 +87,8 @@ class NewsController extends Controller
     {
         return view('news', [
             'news'=> News::whereId($id)->whereCheck(true)->first(),
-            'prev'=> News::where('id', '<', $id)->whereCheck(true)->first(),
-            'next'=> News::where('id', '>', $id)->whereCheck(true)->first()
+            'prev'=> News::where('id', '<', $id)->whereCheck(true)->orderBy('created_at', 'DESC')->first(),
+            'next'=> News::where('id', '>', $id)->whereCheck(true)->orderBy('created_at', 'DESC')->first()
         ]);
     }
 }
