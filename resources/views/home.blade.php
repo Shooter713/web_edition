@@ -1,6 +1,7 @@
 @include('inc.header')
 
 <div class="container">
+    <div class="mt-2">@include('inc.messages')</div>
     <div class="news-block jumbotron mt-2">
         <h1 class="text-center">Список статей</h1>
         @if($news)

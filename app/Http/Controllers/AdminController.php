@@ -19,8 +19,22 @@ class AdminController extends Controller
     /**
      * Редагування новини.
      */
-    public function updateMessage($id)
+    public function fetchNews($id)
     {
-        return view('admin-update-message', ['data' => News::whereId($id)->first()]);
+        $data = News::whereId($id)
+            ->with(['news_tags'=>fn($q) => $q->with('tags')])
+            ->first();
+
+        $tags = [];
+        if($data->news_tags){
+            foreach ($data->news_tags as $tag){
+                $tags[] = $tag->tags->name;
+            }
+        }
+        return view('admin-update-message', [
+            'data' => $data,
+            'tags' => implode(', ', $tags)
+            ]
+        );
     }
 }

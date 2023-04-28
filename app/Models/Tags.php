@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class News extends Model
+class Tags extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -16,15 +16,9 @@ class News extends Model
      *
      * @var array<int, string>
      */
+    public $timestamps = false;
+
     protected $fillable = [
         'name',
-        'image',
-        'tags',
-        'text',
-        'check'
     ];
-
-    public function news_tags(){
-        return $this->hasMany(NewsTags::class, 'news_id', 'id');
-    }
 }

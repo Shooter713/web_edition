@@ -19,13 +19,18 @@
                             <div class="item-name mt-3">{{ $news->text }}</div>
                         </div>
                     </div>
-                    @if($prev)
-                        <a href="/news/{{$prev->id}}">Вперед</a>
-                    @endif
                     @if($next)
                         <a href="/news/{{$next->id}}">Назад</a>
                     @endif
+                    @if($prev)
+                        <a href="/news/{{$prev->id}}">Вперед</a>
+                    @endif
                 </div>
+            </div>
+            <div class="news-link">
+                @foreach($links as $link)
+                    <a href="/news/{{$link->id}}">{{$link->name}}</a>
+                @endforeach
             </div>
         @endif
     </div>

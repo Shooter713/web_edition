@@ -28,12 +28,14 @@ Route::post('/registration/login',[UsersController::class,'login']);
 Route::post('/registration/registration',[UsersController::class,'add']);
 Route::group(['middleware'=>'auth'], function () {
     Route::get('/logout',[UsersController::class,'logout']);
-    Route::get('/admin/update/{id}',[AdminController::class,'updateMessage']);
+    Route::get('/admin/update/{id}',[AdminController::class,'fetchNews']);
     Route::get('/admin/delete-news/{id}',[NewsController::class,'deleteNews']);
     Route::get('/admin',[AdminController::class,'index'])->name('admin');
     Route::post('/admin/news_add',[NewsController::class,'addNews']);
     Route::post('/admin/update-news/{id}',[NewsController::class,'updateNews']);
 });
+
+
 
 
 

@@ -46,6 +46,6 @@ class UsersController extends Controller
      */
     public function logout(){
         Auth::logout();
-        return redirect()->route('home')->with('success', 'Дякуємо за Вихід');
+        return redirect()->route('home')->with('success', 'Ви вийшли з адмін вікна');
     }
 }

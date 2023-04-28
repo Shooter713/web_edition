@@ -33,7 +33,7 @@
                 </div>
                 <div class="form-group">
                     <label for="check">Check</label>
-                    <input type="checkbox" name="view">
+                    <input type="checkbox" checked="checked" name="view">
                 </div>
                 <button class="btn btn-success" type="submit">Додати новину</button>
             </form>

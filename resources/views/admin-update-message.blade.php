@@ -14,8 +14,8 @@
                 <img id="file-news" src="/uploads/{{ $data->image }}" style="width: 100px; height: 100px">
             </div>
             <div class="form-group">
-                <label for="tags">Тема повідомлення</label>
-                <input type="text" name="tags" value="{{ $data->tags }}" placeholder="Тема повідомлення" id="subject" class="form-control">
+                <label for="tags">Теги</label>
+                <input type="text" name="tags" value="{{ $tags }}" placeholder="Введіть теги через кому" id="subject" class="form-control">
             </div>
             <div class="form-group">
                 <label for="text">Введіть текст повідомлення</label>
@@ -23,7 +23,7 @@
             </div>
             <div class="form-group">
                 <label for="check">Check</label>
-                <input type="checkbox" name="view">
+                <input type="checkbox" checked="checked" name="view">
             </div>
             <button type="submit" class="btn btn-success">Оновити</button>
         </form>
