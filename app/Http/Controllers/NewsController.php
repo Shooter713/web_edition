@@ -8,11 +8,6 @@ use App\Models\NewsTags;
 use App\Models\Tags;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
-use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Hash;
-use function Psy\debug;
 
 class NewsController extends Controller
 {
@@ -91,28 +86,23 @@ class NewsController extends Controller
     public function fetchNewsForId($id)
     {
         $news = News::whereId($id)
-            ->with(['news_tags'=>fn($q) => $q->with('tags')])
             ->whereCheck(true)
             ->first();
-
-        $dataLink = [];
-        if($news->news_tags && $news->news_tags->count()){
-            $dataTag = [];
-            foreach ($news->news_tags as $tag){
-                $dataTag[] = $tag->tags->name;
+        $text = $news->text;
+        $allTags = NewsTags::with('tags')->get();
+        foreach ($allTags as $tag){
+            if ($tag->tags && $news->id != $tag->news_id){
+                $pattern = "/".$tag->tags->name."/i";
+                $text = preg_replace($pattern,
+                    '<a href="/news/'.$tag->news_id.'">'.$tag->tags->name.'</a>',
+                    $text);
             }
-
-            $dataLink = News::select('id', 'name')->where(function ($query) use ($dataTag){
-                foreach ($dataTag as $tags){
-                    $query->orWhere('text', 'LIKE', '%'.$tags.'%');
-                }
-            })->where('id', '!=', $id)->whereCheck(true)->get();
         }
         return view('news', [
             'news' => $news,
-            'links'=> $dataLink,
+            'text' => $text ?? '',
             'prev' => News::where('id', '<', $id)->whereCheck(true)->orderBy('created_at', 'DESC')->first(),
-            'next' => News::where('id', '>', $id)->whereCheck(true)->orderBy('created_at', 'DESC')->first()
+            'next' => News::where('id', '>', $id)->whereCheck(true)->orderBy('created_at', 'DESC')->first(),
         ]);
     }
     /**

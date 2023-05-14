@@ -32,7 +32,7 @@
                     <textarea name="text" placeholder="введіть текст" class="form-control"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="check">Check</label>
+                    <label for="check">Активність статті</label>
                     <input type="checkbox" checked="checked" name="view">
                 </div>
                 <button class="btn btn-success" type="submit">Додати новину</button>

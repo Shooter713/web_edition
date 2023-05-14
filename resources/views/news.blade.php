@@ -8,15 +8,15 @@
                     <div class="alert alert-warning row">
                         <div class="col-md-4">
                             <div class="item-image">
-                                <img src="/uploads/{{ $news->image }}">
+                                <img src="/uploads/{{$news->image}}">
                             </div>
                         </div>
                         <div class="col-md-8">
                             <div class="item-head">
-                                <div class="item-name">{{ $news->name }}</div>
-                                <div class="item-created_at">{{ $news->created_at }}</div>
+                                <div class="item-name">{{$news->name}}</div>
+                                <div class="item-created_at">{{$news->created_at}}</div>
                             </div>
-                            <div class="item-name mt-3">{{ $news->text }}</div>
+                            <div class="item-name mt-3"><?php echo $text; ?></div>
                         </div>
                     </div>
                     @if($next)
@@ -27,11 +27,7 @@
                     @endif
                 </div>
             </div>
-            <div class="news-link">
-                @foreach($links as $link)
-                    <a href="/news/{{$link->id}}">{{$link->name}}</a>
-                @endforeach
-            </div>
         @endif
+
     </div>
 </div>

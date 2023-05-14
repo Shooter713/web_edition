@@ -3,9 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\News;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class AdminController extends Controller
 {
@@ -24,7 +21,6 @@ class AdminController extends Controller
         $data = News::whereId($id)
             ->with(['news_tags'=>fn($q) => $q->with('tags')])
             ->first();
-
         $tags = [];
         if($data->news_tags){
             foreach ($data->news_tags as $tag){
